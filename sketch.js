@@ -1,6 +1,6 @@
-var song
-var fft
-var particles = []
+let song
+let fft
+let particles = []
 
 function preload() {
   // Load a sound file
@@ -32,36 +32,36 @@ function draw() {
   fft.analyze()
   amp = fft.getEnergy(20, 200)
 
-  var wave = fft.waveform()
+  let wave = fft.waveform()
 
   // loop to do 2 half circles, one the right with posive sin, one the left with negative sin
-  for(var t = -1; t <= 1; t += 2) {
+  for(let t = -1; t <= 1; t += 2) {
   // beginShape() endShape to link points
   beginShape()
   // more complex form if i is incrementing by 0.5
-  for (var i = 0; i <= 180; i+= 1) {
-    var index = floor(map(i, 0, 180, 0, wave.length - 1))
+  for (let i = 0; i <= 180; i+= 1) {
+    let index = floor(map(i, 0, 180, 0, wave.length - 1))
     
     // radius of circle map(wave[index], -1, 1, minRadiusCircle, maxRadiusCircle)
-    var r = map(wave[index], -1, 1, 150, 350)
+    let r = map(wave[index], -1, 1, 150, 350)
     
-    // var x = i
-    // var y = wave[index] *300 + height/2
-    var x = r * sin(i) * t
-    var y = r * cos(i)
+    // let x = i
+    // let y = wave[index] *300 + height/2
+    let x = r * sin(i) * t
+    let y = r * cos(i)
     vertex(x, y)
   }
   endShape()
   }
 
   // create a particle at each frame
-  var p = new Particle()
+  let p = new Particle()
   particles.push(p)
 
   // to see the particles on the canvas, use show method on particles
-  // for (var i = 0; i < particles.length; i++) {
+  // for (let i = 0; i < particles.length; i++) {
   // go backwards to prevent flicker effect
-  for (var i = particles.length - 1; i >= 0; i--) {
+  for (let i = particles.length - 1; i >= 0; i--) {
     if (!particles[i].edges()) {
     // (amp > 230) is a condition
       particles[i].update(amp > 181)
